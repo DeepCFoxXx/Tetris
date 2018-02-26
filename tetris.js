@@ -19,3 +19,27 @@ function drawBoard() {
   }
   ctxfillstyle = fs;
 }
+
+function Piece(patterns, color) {
+  this.pattern = patterns[0];
+  this.patterns = patterns;
+  this.patterni = 0;
+
+  this.color = color;
+
+  this.x = 0;
+  this.y = -2;
+}
+
+Piece.prototype.draw = function() {
+  fs = ctx.fillStyle;
+  ctx.fillStyle = this.color;
+  for (var ix = 0; ix < this.pattern.length; ix++) {
+    for (var iy = 0; iy < this.pattern.length; iy++) {
+      if (this.pattern[ix][iy]) {
+        drawSquare(this.x + ix, this.y + iy);
+      }
+    }
+  }
+  ctx.fillStyle = fs;
+};
