@@ -83,3 +83,11 @@ Piece.prototype._fill = function(color) {
   }
   ctx.fillStyle = fs;
 };
+
+Piece.prototype.undraw = function(ctx) {
+  this._fill("black");
+};
+
+Piece.prototype.draw = function(ctx) {
+  this._fill(this.color);
+};
