@@ -43,3 +43,9 @@ Piece.prototype.draw = function() {
   }
   ctx.fillStyle = fs;
 };
+
+Piece.prototype.down = function() {
+  this.undraw();
+  this.y++;
+  this.draw();
+};
