@@ -49,3 +49,9 @@ Piece.prototype.down = function() {
   this.y++;
   this.draw();
 };
+
+Piece.prototype.moveRight = function() {
+  this.undraw();
+  this.x++;
+  this.draw();
+};
