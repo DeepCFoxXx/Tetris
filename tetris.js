@@ -55,3 +55,16 @@ Piece.prototype.moveRight = function() {
   this.x++;
   this.draw();
 };
+
+Piece.prototype.moveLeft = function() {
+  this.undraw();
+  this.x--;
+  this.draw();
+};
+
+Piece.prototype.rotate = function() {
+  this.undraw();
+  this.patterni = (this.patterni + 1) % this.patterns.length;
+  this.pattern = this.patterns[this.patterni];
+  this.draw();  
+};
