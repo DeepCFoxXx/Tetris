@@ -164,8 +164,28 @@ Piece.prototype._collides = function() {
   return false;
 };
 
+var piece = null;
+
 var dropStart = Date.now();
-document.body.addEventListener("keypress", function (e) {
+var downI = {};
+document.body.addEventListener("keydown", function (e) {
+  if (downI[e.keyCode] !== null) {
+    clearInterval(downI[e.keyCode]);
+  }
+  key(e.keyCode);
+  downI[e.keyCode] = setInterval(key.bind(this, e.keyCode), 200);
+}, false);
+document.body.addEventListener("keyup", function (e) {
+  if (downI[e.keyCode] !== null) {
+    clearInterval(downI[e.keyCode]);
+  }
+  downI[e.keyCode] = null ;
+}, false);
+
+function key(k) {
+  if (done) {
+    return;
+  }
   if (e.keycode == 38) {
     piece.rotate();
     dropStart = Date.now();
@@ -181,7 +201,7 @@ document.body.addEventListener("keypress", function (e) {
     piece.moveRight();
     dropStart = Date.now();
   }
-},false);
+}
 
 var done = false;
 function main() {
