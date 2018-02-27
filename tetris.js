@@ -94,7 +94,7 @@ Piece.prototype.draw = function(ctx) {
 
 Piece.prototype.rotate = function() {
   var nextpat = this.patterns[(this.patterni + 1) % this.patterns.length];
-  if (!this.collides(0,0 nextpat)) {
+  if (!this.collides(0,0, nextpat)) {
     this.undraw();
     this.patterni = (this.patterni + 1) % this.patterns.length;
     this.pattern = this.patterns[this.patterni];
@@ -103,7 +103,7 @@ Piece.prototype.rotate = function() {
 };
 
 Piece.prototype.down = function() {
-  if (this._collides(0, 1 this.pattern)) {
+  if (this._collides(0, 1, this.pattern)) {
     // Piece hits something and should be locked in place
     // A new piece should be spawned
   } else {
@@ -114,9 +114,17 @@ Piece.prototype.down = function() {
 };
 
 Piece.prototype.moveRight = function() {
-  if (this._collides(1, 0 , this.pattern)) {
+  if (!this._collides(1, 0, this.pattern)) {
     this.undraw();
     this.x++;
     this.undraw();
+  }
+};
+
+Piece.prototype.moveLeft = function() {
+  if (!this._collides(-1, 0, this.pattern)) {
+    this.undraw();
+    this.x--;
+    this.draw();  
   }
 };
