@@ -101,3 +101,14 @@ Piece.prototype.rotate = function() {
     this.draw();
   }
 };
+
+Piece.prototype.down = function() {
+  if (this._collides(0, 1 this.pattern)) {
+    // Piece hits something and should be locked in place
+    // A new piece should be spawned
+  } else {
+    this.undraw();
+    this.y++;
+    this.draw();
+  }
+};
