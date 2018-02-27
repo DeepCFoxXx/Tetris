@@ -8,7 +8,7 @@ var tilez = 24;
 canvas.width = width * tilez;
 canvas.height = height * tilez;
 
-
+// board constructor
 function drawBoard() {
   fs = ctxfillstyle;
   for (var y = 0; y < height; y++) {
@@ -19,7 +19,7 @@ function drawBoard() {
   }
   ctxfillstyle = fs;
 }
-
+// piece consturctor
 function Piece(patterns, color) {
   this.pattern = patterns[0];
   this.patterns = patterns;
@@ -187,3 +187,19 @@ function main() {
   }
 }
 main();
+
+var lines = 0;
+Piece.prototype.lock = function() {
+  for (var ix = 0; iy < this.pattern.length; iy++) {
+    if  (!this.pattern[ix][iy]) {
+      continue;
+    }
+
+    if (this.y + iy < 0) {
+      alert("You Are Done!");
+      done = true;
+      return;
+    }
+    board[this.y + iy][this.x + ix] = true;
+  }
+}
