@@ -191,45 +191,45 @@ main();
 var lines = 0;
 var done = false;
 Piece.prototype.lock = function() {
-	for (var ix = 0; ix < this.pattern.length; ix++) {
-		for (var iy = 0; iy < this.pattern.length; iy++) {
-			if (!this.pattern[ix][iy]) {
-				continue;
-			}
+  for (var ix = 0; ix < this.pattern.length; ix++) {
+    for (var iy = 0; iy < this.pattern.length; iy++) {
+      if (!this.pattern[ix][iy]) {
+        continue;
+      }
 
-			if (this.y + iy < 0) {
-				alert("You're done!");
-				done = true;
-				return;
-			}
-			board[this.y + iy][this.x + ix] = this.color;
-		}
-	}
+      if (this.y + iy < 0) {
+        alert("You're done!");
+        done = true;
+        return;
+      }
+      board[this.y + iy][this.x + ix] = this.color;
+    }
+  }
 
-	var nlines = 0;
-	for (var y = 0; y < height; y++) {
-		var line = true;
-		for (var x = 0; x < width; x++) {
-			line = line && board[y][x] !== "";
-		}
-		if (line) {
-			for (var y2 = y; y2 > 1; y2--) {
-				for (var x = 0; x < width; x++) {
-					board[y2][x] = board[y2-1][x];
-				}
-			}
-			for (var x = 0; x < width; x++) {
-				board[0][x] = "";
-			}
-			nlines++;
-		}
-	}
+  var nlines = 0;
+  for (var y = 0; y < height; y++) {
+    var line = true;
+    for (var x = 0; x < width; x++) {
+      line = line && board[y][x] !== "";
+    }
+    if (line) {
+      for (var y2 = y; y2 > 1; y2--) {
+        for (var x = 0; x < width; x++) {
+          board[y2][x] = board[y2-1][x];
+        }
+      }
+      for (var x = 0; x < width; x++) {
+        board[0][x] = "";
+      }
+      nlines++;
+    }
+  }
 
-	if (nlines > 0) {
-		lines += nlines;
-		drawBoard();
-		console.log(lines);
-	}
+  if (nlines > 0) {
+    lines += nlines;
+    drawBoard();
+    console.log(lines);
+  }
 };
 
 var pieces = [
@@ -241,3 +241,8 @@ var pieces = [
   [T, "purple"],
   [Z, "red"]
 ];
+
+function newPiece() {
+  var p = pieces[parseInt(Math.random() * pieces.length, 10)];
+  return new Piece (p[0], p[1]);
+}
