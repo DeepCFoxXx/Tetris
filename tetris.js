@@ -112,3 +112,11 @@ Piece.prototype.down = function() {
     this.draw();
   }
 };
+
+Piece.prototype.moveRight = function() {
+  if (this._collides(1, 0 , this.pattern)) {
+    this.undraw();
+    this.x++;
+    this.undraw();
+  }
+};
