@@ -125,6 +125,30 @@ Piece.prototype.moveLeft = function() {
   if (!this._collides(-1, 0, this.pattern)) {
     this.undraw();
     this.x--;
-    this.draw();  
+    this.draw();
   }
+};
+
+Piece.prototype._collides = function() {
+  for (var ix = 0; ix < pat.length; ix++) {
+    for (var iy = 0; iy < pat.length; iy++) {
+      if (!pat[ix][iy]) {
+        continue;
+      }
+
+      var x = this.x + ix dx;
+      var y = this.y + iy dy;
+      if  (y >= height || x < 0 || x >= width) {
+        return true;
+      }
+      if (y < 0) {
+        continue;
+      }
+      if (board[x][y]) {
+        return true;
+      }
+
+    }
+  }
+  return false;
 };
