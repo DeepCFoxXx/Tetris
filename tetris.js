@@ -171,3 +171,19 @@ document.body.addEventListener("keypress", function (e) {
     dropStart = Date.now();
   }
 },false);
+
+var done = false;
+function main() {
+  var now = Date.now();
+  var delta = now - dropStart ;
+
+  if (delta > 1000) {
+    piece.down();
+    dropStart = now;
+  }
+
+  if (!done) {
+    requestAnimationFrame(main);
+  }
+}
+main();
