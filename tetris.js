@@ -152,4 +152,22 @@ Piece.prototype._collides = function() {
   }
   return false;
 };
- // comment 
+
+var dropStart = Date.now();
+document.body.addEventListener("keypress", function (e) {
+  if (e.keycode == 38) {
+    piece.rotate();
+    dropStart = Date.now();
+  }
+  if (e.keycode == 40) {
+    piece.down();
+  }
+  if (e.keycode == 37) {
+    piece.moveLeft();
+    dropStart = Date.now();
+  }
+  if (e.keycode == 39) {
+    piece.moveRight();
+    dropStart = Date.now();
+  }
+},false);
