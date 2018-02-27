@@ -13,7 +13,7 @@ function drawBoard() {
   fs = ctxfillstyle;
   for (var y = 0; y < height; y++) {
     for (var x = 0; x < width; x++) {
-      ctxfillstyle = board[y][x] ? 'red' : 'white';
+      ctxfillstyle = board[y][x] || 'white';
       drawSquare(x, y, tilez, tilez);
     }
   }
@@ -63,10 +63,20 @@ Piece.prototype.moveLeft = function() {
 };
 
 Piece.prototype.rotate = function() {
-  this.undraw();
-  this.patterni = (this.patterni + 1) % this.patterns.length;
-  this.pattern = this.patterns[this.patterni];
-  this.draw();
+  var nextpat = this.patterns[(this.patterni + 1) % this.patterns.length];
+  var nudge = 0;
+
+  if (this._collides(0, 0, nextpat)) {
+    nudge = this.x > width / 2 ? -1 : 1;
+  }
+
+  if (this._collides(nudge, 0 ,nextpat)) {
+    this.undraw();
+    this.x += nudge;
+    this.patterni = (this.patterni + 1) % this.patterns.length;
+    this.pattern = this.patterns[this.patterni];
+    this.draw();
+  }
 };
 
 Piece.prototype._fill = function(color) {
