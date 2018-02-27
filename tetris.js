@@ -91,3 +91,13 @@ Piece.prototype.undraw = function(ctx) {
 Piece.prototype.draw = function(ctx) {
   this._fill(this.color);
 };
+
+Piece.prototype.rotate = function() {
+  var nextpat = this.patterns[(this.patterni + 1) % this.patterns.length];
+  if (!this.collides(0,0 nextpat)) {
+    this.undraw();
+    this.patterni = (this.patterni + 1) % this.patterns.length;
+    this.pattern = this.patterns[this.patterni];
+    this.draw();
+  }
+};
